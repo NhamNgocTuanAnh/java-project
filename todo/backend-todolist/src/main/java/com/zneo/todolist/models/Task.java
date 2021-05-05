@@ -1,6 +1,4 @@
 package com.zneo.todolist.models;
-
-import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -28,7 +26,7 @@ public class Task extends AuditModel {
     private Boolean complete;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "todolist_id", nullable = false)
+    @JoinColumn(name = "todolist_id", nullable = true)
     @JsonIgnore
     private TodoList todoList;
 }

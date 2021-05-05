@@ -7,7 +7,7 @@ import com.zneo.todolist.models.Task;
 import com.zneo.todolist.models.TodoList;
 import com.zneo.todolist.services.TaskService;
 import com.zneo.todolist.services.TodoListService;
-
+import javax.validation.Valid;
 import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,14 +20,14 @@ public class TodoListController {
     @Autowired
     private TodoListService todoListService;
 
-    @PostMapping("/todolists")
-    public TodoList createTodoList(@Valid @RequestBody TodoList todoList){
-        return todoListService.save(todoList);
-    }
+    // @PostMapping("/todolists")
+    // public TodoList createTodoList(@Valid @RequestBody TodoList todoList){
+    //     return todoListService.save(todoList);
+    // }
     
-    @GetMapping("/todolists")
-    public ResponseEntity<?> getallTodoList(){
-        List<TodoList> todoLists = todoListService.findAll();
-        return ResponseEntity.ok(todoLists) ;
-    }
+    // @GetMapping("/todolists")
+    // public ResponseEntity<?> getallTodoList(){
+    //     List<TodoList> todoLists = todoListService.findAll();
+    //     return ResponseEntity.ok(todoLists) ;
+    // }
 }
