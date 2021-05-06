@@ -16,7 +16,6 @@ export default class Task extends Component {
         id: null,
         title: "",
         content: "",
-        todolist_id:null,
         complete: false
       },
       message: ""
@@ -32,7 +31,7 @@ export default class Task extends Component {
 
     this.setState(function(prevState) {
       return {
-        currentTutorial: {
+        currentTask: {
           ...prevState.currentTask,
           title: title
         }
@@ -69,7 +68,7 @@ export default class Task extends Component {
       id: this.state.currentTask.id,
       title: this.state.currentTask.title,
       content: this.state.currentTask.content,
-      published: status
+      complete: status
     };
 
     TaskDataService.update(this.state.currentTask.id, data)
@@ -77,7 +76,7 @@ export default class Task extends Component {
         this.setState(prevState => ({
             currentTask: {
             ...prevState.currentTask,
-            published: status
+            complete: status
           }
         }));
         console.log(response.data);
@@ -126,7 +125,7 @@ export default class Task extends Component {
               <div className="form-group">
                 <label htmlFor="title">Title</label>
                 <input
-                  type="text"
+                  type="text" maxLength="88"
                   className="form-control"
                   id="title"
                   value={currentTask.title}
@@ -148,23 +147,24 @@ export default class Task extends Component {
                 <label>
                   <strong>Status:</strong>
                 </label>
-                {currentTask.complete ? "Published" : "Pending"}
+                {currentTask.complete ? "Done" : "Doing"}
               </div>
             </form>
 
             {currentTask.complete ? (
-              <button
-                className="badge badge-primary mr-2"
-                onClick={() => this.updateComplete(false)}
-              >
-                UnPublish
-              </button>
+                  <button
+                  className="badge badge-primary mr-2"
+                  onClick={() => this.updateComplete(false)}
+                >
+                  Done
+                </button>
+          
             ) : (
               <button
-                className="badge badge-primary mr-2"
+                className="badge btn-danger mr-2"
                 onClick={() => this.updateComplete(true)}
               >
-                Publish
+               Doing
               </button>
             )}
 

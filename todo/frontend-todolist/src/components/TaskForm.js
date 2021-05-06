@@ -1,4 +1,4 @@
-import React, {  Component } from "react";
+import React, { Component } from "react";
 import TaskDataService from "../services/task.service";
 
 export default class TaskForm extends Component {
@@ -12,7 +12,6 @@ export default class TaskForm extends Component {
       id: null,
       title: "",
       content: "",
-      todolist_id: null,
       complete: false,
       submitted: false,
     };
@@ -34,7 +33,6 @@ export default class TaskForm extends Component {
       id: this.state.id,
       title: this.state.title,
       content: this.state.content,
-      todolist_id: this.state.todolist_id,
     };
     console.log(data);
     TaskDataService.create(data)
@@ -77,6 +75,7 @@ export default class TaskForm extends Component {
             </div>
           ) : (
             <div>
+              <h4>Creater new task</h4>
               <div className="form-group">
                 <label htmlFor="title">Title</label>
                 <input
