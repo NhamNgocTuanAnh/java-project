@@ -3,10 +3,10 @@ package com.zneo.todolist.services;
 import java.util.Optional;
 
 import com.zneo.todolist.Repositories.TaskRepository;
-import com.zneo.todolist.Repositories.TodolistRepository;
+// import com.zneo.todolist.Repositories.TodolistRepository;
 import com.zneo.todolist.form.TaskForm;
 import com.zneo.todolist.models.Task;
-import com.zneo.todolist.models.TodoList;
+// import com.zneo.todolist.models.TodoList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,8 +17,8 @@ public class TaskService {
     @Autowired
     private TaskRepository taskRepository;
 
-    @Autowired
-    private TodolistRepository todolistRepository;
+    // @Autowired
+    // private TodolistRepository todolistRepository;
 
     public Task getTask(Long id) {
         return taskRepository.findById(id).get();
@@ -29,12 +29,12 @@ public class TaskService {
         task.setComplete(false);
         task.setTitle(taskForm.getTitle());
         task.setContent(taskForm.getContent());
-        if(taskForm.getTodolist_id() != null){
-            TodoList todoList = todolistRepository.findById(taskForm.getTodolist_id()).get();
-            if(todoList!=null){
-                task.setTodoList(todoList);
-            }
-        }
+        // if(taskForm.getTodolist_id() != null){
+        //     TodoList todoList = todolistRepository.findById(taskForm.getTodolist_id()).get();
+        //     if(todoList!=null){
+        //         task.setTodoList(todoList);
+        //     }
+        // }
         taskRepository.save(task);
        
         return task;

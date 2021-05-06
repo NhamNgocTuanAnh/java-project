@@ -8,5 +8,5 @@ public class TaskForm {
     private String title;
     private String content;
     // private Boolean complete;
-    private Long todolist_id;
+
 }

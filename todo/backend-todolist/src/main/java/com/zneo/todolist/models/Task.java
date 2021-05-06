@@ -25,8 +25,8 @@ public class Task extends AuditModel {
     private String content;
     private Boolean complete;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "todolist_id", nullable = true)
-    @JsonIgnore
-    private TodoList todoList;
+    // @ManyToOne(fetch = FetchType.LAZY)
+    // @JoinColumn(name = "todolist_id", nullable = true)
+    // @JsonIgnore
+    // private TodoList todoList;
 }

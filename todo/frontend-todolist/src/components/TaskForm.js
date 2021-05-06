@@ -43,7 +43,6 @@ export default class TaskForm extends Component {
           id: response.data.id,
           title: response.data.title,
           content: response.data.content,
-          todolist_id: response.data.todolist_id,
           // complete: response.data.complete,
           submitted: true,
         });
@@ -61,7 +60,6 @@ export default class TaskForm extends Component {
       title: "",
       description: "",
       published: false,
-      todolist_id: null,
 
       submitted: false,
     });
