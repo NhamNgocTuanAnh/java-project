@@ -1,2 +1,2 @@
 # java-project
-Hi, thmy first project Java
+Hi, this my first project Java

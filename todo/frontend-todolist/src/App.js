@@ -8,9 +8,9 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
 class App extends Component {
   render() {
-    return (  <div className="body">
-      <Router>
-      
+    return (
+      <div className="body">
+        <Router>
           <nav className="navbar navbar-expand navbar-dark bg-dark">
             <a href="/tasks" className="navbar-brand">
               Todo App
@@ -29,16 +29,15 @@ class App extends Component {
             </div>
           </nav>
 
-          <div className="container mt-3 ">
-        
+          <div className="App container mt-3 ">
             <Switch>
               <Route exact path={["/", "/tasks"]} component={TaskList} />
               <Route exact path="/add" component={TaskForm} />
               <Route path="/tasks/:id" component={Task} />
             </Switch>
           </div>
-       
-      </Router> </div>
+        </Router>{" "}
+      </div>
     );
   }
 }

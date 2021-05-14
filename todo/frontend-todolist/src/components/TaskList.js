@@ -246,12 +246,12 @@ export default class TaskList extends Component {
                 <div>
                   <h4>You submitted successfully!</h4>
                   <button className="btn btn-success" onClick={this.newTask}>
-                    Add task quick
+                    Add new task
                   </button>
                 </div>
               ) : (
                 <div>
-                  <h4>Create task quick</h4>
+                  <h4>Task Quick Add</h4>
                   <div className="form-group">
                     <label htmlFor="title">Title</label>
                     <input
@@ -328,22 +328,27 @@ export default class TaskList extends Component {
                   onClick={() => this.setActiveTask(task, index)}
                   key={index}
                 >
-                  {task.title}
-                  {task.complete ? (
-                    <button
-                      className="badge badge-primary mr-2"
-                      onClick={() => this.updateComplete(task, false)}
-                    >
-                      Done
-                    </button>
-                  ) : (
-                    <button
-                      className="badge mr-2 btn-danger"
-                      onClick={() => this.updateComplete(task, true)}
-                    >
-                      Doing
-                    </button>
-                  )}
+                  <div style={{ float: "left" }}>
+                    <p> {task.title}</p>
+                  </div>
+
+                  <div className="button-control">
+                    {task.complete ? (
+                      <button
+                        className="badge badge-primary mr-2"
+                        onClick={() => this.updateComplete(task, false)}
+                      >
+                        Done
+                      </button>
+                    ) : (
+                      <button
+                        className="badge mr-2 btn-danger"
+                        onClick={() => this.updateComplete(task, true)}
+                      >
+                        Doing
+                      </button>
+                    )}
+                  </div>
                 </li>
               ))}
           </ul>
