@@ -1,13 +1,17 @@
 package com.quanlynhansu.demo.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.quanlynhansu.demo.entity.Department;
 
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 
 import org.hibernate.*;
+import org.hibernate.criterion.CriteriaQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -49,10 +53,20 @@ public class DepartmentDaoImpl implements DepartmentDao {
     @Override
     public List<Department> getPagination(int position, int pageSize) {
         Session currentSession = entityManager.unwrap(Session.class);
+        
 
-        List<Department> departments = currentSession.createQuery("FROM department",Department.class)
-                .setFirstResult(position).setMaxResults(pageSize).getResultList();
+        TypedQuery<Department> idQuery = entityManager.createQuery("FROM department d order by d.id asc", Department.class);
+        List<Department> departments = idQuery
+                              .getResultList();
+        // List<Department> departments = currentSession.createQuery("SELECT * FROM department d order by d.id asc", Department.class)
+        //         .setFirstResult(position).setMaxResults(pageSize).getResultList();
         return departments;
+    }
+
+    @Override
+    public long countTotalRecords() {
+        Session currentSession = entityManager.unwrap(Session.class);
+        return (Long)currentSession.createQuery("Select count (d.id) from Department d").uniqueResult();       
     }
 
 }

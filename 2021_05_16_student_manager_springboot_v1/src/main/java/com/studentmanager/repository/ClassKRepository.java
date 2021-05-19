@@ -8,9 +8,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.studentmanager.entities.Department;
+import com.studentmanager.entities.ClassK;
 import com.studentmanager.entities.Student;
+
 @Repository
-public interface DepartmentRepository extends JpaRepository<Department, Integer>{
+public interface ClassKRepository  extends JpaRepository<ClassK, String>{
     
 }

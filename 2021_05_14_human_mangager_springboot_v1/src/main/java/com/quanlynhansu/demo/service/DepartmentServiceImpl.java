@@ -45,4 +45,10 @@ public class DepartmentServiceImpl implements DepartmentService {
         return  departmentDao.getPagination(position, pageSize);
     }
 
+    @Override
+    public long countTotalRecords() {
+        // TODO Auto-generated method stub
+        return departmentDao.countTotalRecords();
+    }
+
 }

@@ -7,11 +7,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
-import com.studentmanager.entities.Customer;
 import com.studentmanager.entities.Student;
-
 @Repository
-public interface CustomerRepository  extends JpaRepository<Customer, Integer>{
+public interface StudentRepository  extends JpaRepository<Student, String>{
     
 }

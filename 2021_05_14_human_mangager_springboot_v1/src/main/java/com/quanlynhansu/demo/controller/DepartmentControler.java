@@ -27,7 +27,10 @@ public class DepartmentControler {
         List<Department> department = departmentService.get();
         return new ResponseEntity<>(department, HttpStatus.OK);
     }
-
+    @GetMapping("/cout-department")
+    public ResponseEntity<Long> countDepartment() {
+        return new ResponseEntity<>(departmentService.countTotalRecords(), HttpStatus.OK);
+    }
     @GetMapping("/all-department")
     public ResponseEntity<List<Department>> findAllDepartmentWithPagintation(
             @RequestParam(defaultValue = "1") int position, @RequestParam(defaultValue = "3") int pageSize) {

@@ -14,4 +14,6 @@ public interface DepartmentService {
   void delete(int id);
 
   List<Department> getPagination(int position, int pageSize);
+
+  public long countTotalRecords();
 }
