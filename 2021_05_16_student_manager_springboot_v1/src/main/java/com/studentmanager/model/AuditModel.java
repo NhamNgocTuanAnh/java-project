@@ -1,4 +1,4 @@
-package com.studentmanager.entities;
+package com.studentmanager.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

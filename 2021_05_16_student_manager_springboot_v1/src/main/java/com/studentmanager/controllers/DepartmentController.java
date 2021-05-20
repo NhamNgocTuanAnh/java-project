@@ -4,8 +4,8 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.studentmanager.dtos.DepartmentDto;
-import com.studentmanager.entities.Department;
+import com.studentmanager.dto.DepartmentDto;
+import com.studentmanager.model.Department;
 import com.studentmanager.repository.DepartmentRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;

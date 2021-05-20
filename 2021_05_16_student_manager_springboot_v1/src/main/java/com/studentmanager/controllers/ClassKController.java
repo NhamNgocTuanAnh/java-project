@@ -4,9 +4,9 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.studentmanager.dtos.ClassKDto;
-import com.studentmanager.entities.ClassK;
-import com.studentmanager.entities.Department;
+import com.studentmanager.dto.ClassKDto;
+import com.studentmanager.model.ClassK;
+import com.studentmanager.model.Department;
 import com.studentmanager.repository.ClassKRepository;
 import com.studentmanager.repository.DepartmentRepository;
 
@@ -85,4 +85,12 @@ public class ClassKController {
         return "classk has been deleted with id:" + id;
     }
 
+    @GetMapping("/classk/{id}")
+    public ClassK get(@PathVariable String id) {
+        ClassK classK = classKRepository.findById(id).get();
+        if (classK == null) {
+            throw new RuntimeException("classK not found for the Id:" + id);
+        }
+        return classK;
+    }
 }

@@ -1,8 +1,8 @@
-package com.studentmanager.dtos;
+package com.studentmanager.dto;
 
 import java.util.Date;
 
-import com.studentmanager.entities.ClassK;
+import com.studentmanager.model.ClassK;
 
 import lombok.Data;
 
@@ -14,6 +14,6 @@ public class StudentDto {
     private Date BIRTHDATE;
     private int gender;
     private String address;
-    private ClassK classK;
+    private String classk_id;
 
 }

@@ -1,8 +1,8 @@
-package com.studentmanager.dtos;
+package com.studentmanager.dto;
+
+import com.studentmanager.model.Department;
 
 import lombok.Data;
-
-import com.studentmanager.entities.Department;
 
 @Data
 public class ClassKDto {
