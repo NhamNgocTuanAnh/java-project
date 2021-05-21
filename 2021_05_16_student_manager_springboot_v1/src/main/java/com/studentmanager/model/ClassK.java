@@ -20,6 +20,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -49,7 +51,8 @@ public class ClassK  implements Serializable{
     private String departmentId;
     
     @ManyToOne(optional = true,fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})   
+	@JsonIgnore
+    // @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})   
     @JoinColumn(name = "Department_id", insertable = false, updatable = false)
     private Department department;
 

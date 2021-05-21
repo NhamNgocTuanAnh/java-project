@@ -19,12 +19,12 @@ public class StudentServiceImpl implements StudentService{
 
  
 
-    @Override
-    public List<Student> findByName1(String name,int position,int pagesize) {
-        Sort sort = Sort.by("name").descending();
-        Pageable pageable = PageRequest.of(position, pagesize, sort);
-        return studentRepository.findByName1(name, pageable);
-    }
+    // @Override
+    // public List<Student> findByName1(String name,int position,int pagesize) {
+    //     Sort sort = Sort.by("name").descending();
+    //     Pageable pageable = PageRequest.of(position, pagesize, sort);
+    //     return studentRepository.findByName1(name, pageable);
+    // }
     @Override
     public List<Student> pageableStudent(int pagenumber,int rowsofpage){
         return studentRepository.pageableStudent(pagenumber,rowsofpage);

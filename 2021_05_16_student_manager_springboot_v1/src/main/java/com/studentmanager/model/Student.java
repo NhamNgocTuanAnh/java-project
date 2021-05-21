@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
@@ -27,6 +28,7 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "student")
 @DynamicUpdate
+@Data
 public class Student implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -48,7 +50,7 @@ public class Student implements Serializable {
     
     @ManyToOne(optional = true,fetch = FetchType.EAGER)
     @JoinColumn(name = "class_id", insertable = false, updatable = false)
-    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})   
+    @JsonIgnore   
     private ClassK classk;
 
     @Column(name = "address")
@@ -62,98 +64,5 @@ public class Student implements Serializable {
     @LastModifiedDate
     private Timestamp TIME_UPDATE;
 
-	public Student(String id, String name, Date bIRTHDATE, int gender, String classId, ClassK classk, String address,
-			Timestamp tIME_CREATE, Timestamp tIME_UPDATE) {
-		super();
-		this.id = id;
-		this.name = name;
-		BIRTHDATE = bIRTHDATE;
-		this.gender = gender;
-		this.classId = classId;
-		this.classk = classk;
-		this.address = address;
-		TIME_CREATE = tIME_CREATE;
-		TIME_UPDATE = tIME_UPDATE;
-	}
-
-	public Student() {
-		super();
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Date getBIRTHDATE() {
-		return BIRTHDATE;
-	}
-
-	public void setBIRTHDATE(Date bIRTHDATE) {
-		BIRTHDATE = bIRTHDATE;
-	}
-
-	public int getGender() {
-		return gender;
-	}
-
-	public void setGender(int gender) {
-		this.gender = gender;
-	}
-
-	public String getClassId() {
-		return classId;
-	}
-
-	public void setClassId(String classId) {
-		this.classId = classId;
-	}
-
-	public ClassK getClassk() {
-		return classk;
-	}
-
-	public void setClassk(ClassK classk) {
-		this.classk = classk;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public Timestamp getTIME_CREATE() {
-		return TIME_CREATE;
-	}
-
-	public void setTIME_CREATE(Timestamp tIME_CREATE) {
-		TIME_CREATE = tIME_CREATE;
-	}
-
-	public Timestamp getTIME_UPDATE() {
-		return TIME_UPDATE;
-	}
-
-	public void setTIME_UPDATE(Timestamp tIME_UPDATE) {
-		TIME_UPDATE = tIME_UPDATE;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 
 }

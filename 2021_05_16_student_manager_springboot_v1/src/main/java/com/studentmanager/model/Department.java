@@ -28,13 +28,16 @@ public class Department implements Serializable {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+
     @Column(name = "id", updatable = false, nullable = false)
     private String id;
+
     @Column(name = "name")
     private String name;
 
     @Column(name = "description")
     private String description;
+    
     @Column(name = "TIME_CREATE", nullable = true, updatable = true)
     @CreatedDate
     private Timestamp TIME_CREATE;

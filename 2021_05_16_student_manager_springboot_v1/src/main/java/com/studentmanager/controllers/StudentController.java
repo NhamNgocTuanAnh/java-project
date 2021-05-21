@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.sql.Timestamp;
+import java.time.Clock;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo.None;
+import com.studentmanager.dto.StudentAnlDto;
 import com.studentmanager.dto.StudentDto;
 import com.studentmanager.model.ClassK;
 import com.studentmanager.model.Student;
@@ -59,12 +63,14 @@ public class StudentController {
         return Sort.Direction.ASC;
     }
 
-    @GetMapping("/student")
-    public List<Student> getAllStudents() {
-        return studentRepository.findAll();
+    @GetMapping("/anal-student")
+    public List<StudentAnlDto> getAllStudents(@RequestParam(defaultValue = "20") int startAge,
+            @RequestParam(defaultValue = "25") int endAge) {
+
+        return studentRepository.analyList(startAge, endAge);
     }
 
-    @GetMapping("/page-student")
+    @GetMapping("/student")
     public ResponseEntity<Map<String, Object>> pageable(@RequestParam(required = false) String name,
             @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "3") int size,
             @RequestParam(defaultValue = "id,desc") String[] sort) {
@@ -89,10 +95,11 @@ public class StudentController {
         int gender = studentDto.getGender();
         String address = studentDto.getAddress();
 
-        ClassK classK = classKRepository.findById(studentDto.getClassk_id()).get();
         // classKRepository.findById(studentDto.getClassK().getId()).get();
         if (!classKRepository.findById(studentDto.getClassk_id()).isPresent()) {
             return null;
+        } else {
+            student.setClassId(studentDto.getClassk_id());
         }
         student.setId("1");
 
@@ -103,11 +110,7 @@ public class StudentController {
         if (address != null) {
             student.setAddress(address);
         }
-        if (classK != null) {
-            student.setClassk(classK);
-        } else {
-            return null;
-        }
+
         if (name != null) {
             student.setName(name);
         }

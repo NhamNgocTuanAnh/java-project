@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public interface StudentService {
     
   
-    List<Student> findByName1(String name,int position,int pagesize) ;
+    // List<Student> findByName1(String name,int position,int pagesize) ;
 
     List<Student> pageableStudent(int pagenumber,int rowsofpage);
 }
