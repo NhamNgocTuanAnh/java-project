@@ -4,14 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.sql.Timestamp;
-import java.time.Clock;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo.None;
 import com.studentmanager.dto.StudentAnlDto;
 import com.studentmanager.dto.StudentDto;
 import com.studentmanager.model.ClassK;
@@ -25,6 +21,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
+import org.springframework.data.repository.support.Repositories;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,40 +84,16 @@ public class StudentController {
     }
 
     @PostMapping("/student")
-    public Student saveStudent(@RequestBody StudentDto studentDto) {
-        Student student = new Student();
+    public ResponseEntity<?> saveStudent(@RequestBody StudentDto studentDto) {
 
-        String name = studentDto.getName();
-        Date BIRTHDATE = studentDto.getBIRTHDATE();
-        int gender = studentDto.getGender();
-        String address = studentDto.getAddress();
+        try {
+            studentService.saveStudent(studentDto);
 
-        // classKRepository.findById(studentDto.getClassK().getId()).get();
-        if (!classKRepository.findById(studentDto.getClassk_id()).isPresent()) {
-            return null;
-        } else {
-            student.setClassId(studentDto.getClassk_id());
-        }
-        student.setId("1");
-
-        if (BIRTHDATE != null) {
-            student.setBIRTHDATE(BIRTHDATE);
+            return new ResponseEntity<>("o", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        if (address != null) {
-            student.setAddress(address);
-        }
-
-        if (name != null) {
-            student.setName(name);
-        }
-        student.setGender(studentDto.getGender());
-        student.setTIME_UPDATE(Timestamp.valueOf(LocalDateTime.now()));
-        student.setTIME_CREATE(Timestamp.valueOf(LocalDateTime.now()));
-        student.setId("id");
-        studentRepository.save(student);
-
-        return student;
     }
 
     @PutMapping("/student")
@@ -128,11 +101,11 @@ public class StudentController {
         Student student = studentRepository.findById(studentDto.getId()).get();
 
         String name = studentDto.getName();
-        Date BIRTHDATE = studentDto.getBIRTHDATE();
+        Date BIRTHDATE = studentDto.getBirthdate();
         int gender = studentDto.getGender();
         String address = studentDto.getAddress();
         // ClassK classK = classKRepository.findById(studentDto.getClassK_id()).get();
-        if (!classKRepository.findById(studentDto.getClassk_id()).isPresent()) {
+        if (!classKRepository.findById(studentDto.getClass_id()).isPresent()) {
             return null;
         }
         if (student != null) {

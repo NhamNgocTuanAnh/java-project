@@ -23,7 +23,10 @@ public interface StudentRepository extends JpaRepository<Student, String> {
     // @Query("SELECT e FROM Student e WHERE e.name LIKE :name ORDER BY e.id")
     // public List<Student> findByName1(@Param("name") String name, Pageable pageable);
 
-    @Query(value = "select new com.studentmanager.dto.StudentAnlDto(count(s.classId),c.name, d.name) from Student s inner join ClassK c on s.classId=c.id inner join Department d on d.id=c.departmentId where trunc(to_number(sysdate - to_date(s.BIRTHDATE)) / 365.25) BETWEEN ?1 and ?2 group by s.classId,c.name,d.name")
+    @Query(value = "select"+ 
+    " new com.studentmanager.dto.StudentAnlDto(count(s.classId),c.name, d.name)"+
+    " from Student s inner join ClassK c on s.classId=c.id inner join Department d on d.id=c.departmentId"+ 
+    " where trunc(to_number(sysdate - to_date(s.birthdate)) / 365.25) BETWEEN ?1 and ?2 group by s.classId,c.name,d.name")
     public List<StudentAnlDto> analyList(int startAge,int endAge);   
     
     // @Query(value = "select * from Student s  where a.birthdate <= :creationDateTime ")

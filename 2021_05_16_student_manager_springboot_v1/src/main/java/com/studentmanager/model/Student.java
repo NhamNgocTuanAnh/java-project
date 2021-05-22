@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.Builder;
 import lombok.Data;
 
 import org.hibernate.annotations.DynamicUpdate;
@@ -29,6 +30,7 @@ import java.sql.Timestamp;
 @Table(name = "student")
 @DynamicUpdate
 @Data
+// @Builder
 public class Student implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,7 +43,7 @@ public class Student implements Serializable {
     private String name;
 
     @Column(name = "BIRTHDATE")
-    private Date BIRTHDATE;
+    private Date birthdate;
     @Column(name = "gender")
     private int gender;
     

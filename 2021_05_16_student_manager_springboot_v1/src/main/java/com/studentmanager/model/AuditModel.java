@@ -18,28 +18,23 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(
-        value = {"TIME_CREATE", "TIME_UPDATE"},
-        allowGetters = true
-)
+@JsonIgnoreProperties(value = { "TIME_CREATE", "TIME_UPDATE" }, allowGetters = true)
 @Data
 public abstract class AuditModel implements Serializable {
 
   private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "id", updatable = false, nullable = false)
-    private String id;
+  @Id
+  @GeneratedValue(generator = "UUID")
+  @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+  @Column(name = "id", updatable = false, nullable = false)
+  private String id;
 
+  @Column(name = "TIME_CREATE", nullable = true, updatable = true)
+  @CreatedDate
+  private Timestamp TIME_CREATE;
 
-    @Column(name = "TIME_CREATE", nullable = true, updatable = true)
-    @CreatedDate
-    private Timestamp TIME_CREATE;
-
-    @Column(name = "TIME_UPDATE", nullable = true)
-    @LastModifiedDate
-    private Timestamp TIME_UPDATE;
-
+  @Column(name = "TIME_UPDATE", nullable = true)
+  @LastModifiedDate
+  private Timestamp TIME_UPDATE;
 
 }

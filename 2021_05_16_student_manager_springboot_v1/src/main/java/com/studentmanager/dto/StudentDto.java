@@ -11,9 +11,9 @@ public class StudentDto {
 
     private String id;
     private String name;
-    private Date BIRTHDATE;
+    private Date birthdate;
     private int gender;
     private String address;
-    private String classk_id;
+    private String class_id;
 
 }
