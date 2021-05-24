@@ -65,7 +65,7 @@ public class ClassKController {
             }
             if (department != null) {
                 classK.setDepartment(department);
-                classK.setDepartmentId(classKDto.getDepartment_id());
+                classK.setDepartment_id(classKDto.getDepartment_id());
             }
             classK.setTIME_UPDATE(Timestamp.valueOf(LocalDateTime.now()));
             classKRepository.save(classK);

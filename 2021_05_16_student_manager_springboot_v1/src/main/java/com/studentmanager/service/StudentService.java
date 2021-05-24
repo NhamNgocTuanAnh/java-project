@@ -10,5 +10,6 @@ public interface StudentService {
     
     List<Student> pageableStudent(int pagenumber,int rowsofpage);
     List<StudentAnlDto> analyList(int startAge,int endAge); 
-    void saveStudent(StudentDto studentDto);
+    Student saveStudent(StudentDto studentDto);
+    Student updateStudent(Student student,StudentDto studentDto);
 }

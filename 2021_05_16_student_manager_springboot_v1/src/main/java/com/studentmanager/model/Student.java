@@ -46,13 +46,13 @@ public class Student implements Serializable {
     private Date birthdate;
     @Column(name = "gender")
     private int gender;
-    
+
     @Column(name = "class_id")
-    private String classId;
-    
-    @ManyToOne(optional = true,fetch = FetchType.EAGER)
+    private String class_id;
+
+    @ManyToOne(optional = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "class_id", insertable = false, updatable = false)
-    @JsonIgnore   
+    @JsonIgnore
     private ClassK classk;
 
     @Column(name = "address")
@@ -65,6 +65,5 @@ public class Student implements Serializable {
     @Column(name = "TIME_UPDATE", nullable = true)
     @LastModifiedDate
     private Timestamp TIME_UPDATE;
-
 
 }

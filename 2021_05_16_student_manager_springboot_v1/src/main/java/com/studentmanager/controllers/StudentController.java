@@ -24,6 +24,7 @@ import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.repository.support.Repositories;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -61,16 +62,19 @@ public class StudentController {
     }
 
     @GetMapping("/anal-student")
-    public List<StudentAnlDto> getAllStudents(@RequestParam(defaultValue = "20") int startAge,
-            @RequestParam(defaultValue = "25") int endAge) {
-
-        return studentRepository.analyList(startAge, endAge);
+    public List<StudentAnlDto> getAllStudents(@RequestParam(name = "name", required = false) String name,
+            @RequestParam(name = "department_id", required = false) String department_id,
+            @RequestParam(name = "class_id", required = false) String class_id,
+            @RequestParam(name = "gender", required = false) String gender,
+            @RequestParam(defaultValue = "0")  int startAge,
+            @RequestParam(defaultValue = "25")  int endAge) {
+            
+        return studentRepository.findList(name, department_id, class_id,gender, startAge, endAge);
     }
 
     @GetMapping("/student")
     public ResponseEntity<Map<String, Object>> pageable(@RequestParam(required = false) String name,
-            @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "3") int size,
-            @RequestParam(defaultValue = "id,desc") String[] sort) {
+            @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "3") int size) {
 
         try {
             List<Student> students = studentService.pageableStudent(page, size);
@@ -87,9 +91,8 @@ public class StudentController {
     public ResponseEntity<?> saveStudent(@RequestBody StudentDto studentDto) {
 
         try {
-            studentService.saveStudent(studentDto);
 
-            return new ResponseEntity<>("o", HttpStatus.OK);
+            return new ResponseEntity<>(studentService.saveStudent(studentDto), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -97,37 +100,20 @@ public class StudentController {
     }
 
     @PutMapping("/student")
-    public Student update(@RequestBody StudentDto studentDto) {
+    public ResponseEntity<?> update(@RequestBody StudentDto studentDto) {
         Student student = studentRepository.findById(studentDto.getId()).get();
 
-        String name = studentDto.getName();
-        Date BIRTHDATE = studentDto.getBirthdate();
-        int gender = studentDto.getGender();
-        String address = studentDto.getAddress();
-        // ClassK classK = classKRepository.findById(studentDto.getClassK_id()).get();
-        if (!classKRepository.findById(studentDto.getClass_id()).isPresent()) {
-            return null;
-        }
-        if (student != null) {
-            // if (BIRTHDATE != null) {
-            // student.setBIRTHDATE(BIRTHDATE);
-            // }
+        try {
 
-            if (address != null) {
-                student.setAddress(address);
+            if (student == null) {
+                return new ResponseEntity<>("Student not found.", HttpStatus.INTERNAL_SERVER_ERROR);
             }
-            // if (classK != null) {
-            // student.setClassk(classK);
-            // }
-            if (name != null) {
-                student.setName(name);
-            }
-            student.setTIME_UPDATE(Timestamp.valueOf(LocalDateTime.now()));
 
-            studentRepository.save(student);
+            return new ResponseEntity<>(studentService.updateStudent(student, studentDto), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        return student;
     }
 
     @DeleteMapping("/student/{id}")

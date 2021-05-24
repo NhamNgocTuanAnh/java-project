@@ -39,38 +39,42 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void saveStudent(StudentDto studentDto) {
-        // TODO Auto-generated method stub
+    public Student saveStudent(StudentDto studentDto) {
 
         // Student student =
         // Student.builder().name(studentDto.getName()).birthdate(studentDto.getBirthdate())
         // .gender(studentDto.getGender()).TIME_CREATE(Timestamp.valueOf(LocalDateTime.now()))
         // .TIME_UPDATE(Timestamp.valueOf(LocalDateTime.now())).build();
-
-        // studentRepository.save(student);
         Student student = new Student();
-        String name = studentDto.getName();
-        Date BIRTHDATE = studentDto.getBirthdate();
-        int gender = studentDto.getGender();
-        String address = studentDto.getAddress();
-        // ClassK classK = classKRepository.findById(studentDto.getClassK_id()).get();
         if (!classKRepository.findById(studentDto.getClass_id()).isPresent()) {
 
         } else {
 
-            if (address != null) {
-                student.setAddress(address);
-            }
-
-            if (name != null) {
-                student.setName(name);
-            }
+            student.setAddress(studentDto.getAddress());
+            student.setClass_id(studentDto.getClass_id());
+            student.setBirthdate(studentDto.getBirthdate());
+            student.setName(studentDto.getName());
+            student.setGender(studentDto.getGender());
             student.setTIME_UPDATE(Timestamp.valueOf(LocalDateTime.now()));
             student.setTIME_CREATE(Timestamp.valueOf(LocalDateTime.now()));
 
             studentRepository.save(student);
-
+            
         }
+        return student;
+    }
 
+    @Override
+    public Student updateStudent(Student student, StudentDto studentDto) {
+        // TODO Auto-generated method stub
+        student.setAddress(studentDto.getAddress());
+        student.setClass_id(studentDto.getClass_id());
+        student.setBirthdate(studentDto.getBirthdate());
+        student.setName(studentDto.getName());
+        student.setGender(studentDto.getGender());
+        student.setTIME_UPDATE(Timestamp.valueOf(LocalDateTime.now()));
+
+        studentRepository.save(student);
+        return student;
     }
 }
