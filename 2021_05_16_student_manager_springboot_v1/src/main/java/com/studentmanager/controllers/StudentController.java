@@ -25,6 +25,7 @@ import org.springframework.data.repository.support.Repositories;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -40,7 +41,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class StudentController {
     @Autowired
     private StudentRepository studentRepository;
@@ -62,14 +63,14 @@ public class StudentController {
     }
 
     @GetMapping("/anal-student")
+    @PreAuthorize("hasRole('ADMIN')")
     public List<StudentAnlDto> getAllStudents(@RequestParam(name = "name", required = false) String name,
             @RequestParam(name = "department_id", required = false) String department_id,
             @RequestParam(name = "class_id", required = false) String class_id,
             @RequestParam(name = "gender", required = false) String gender,
-            @RequestParam(defaultValue = "0")  int startAge,
-            @RequestParam(defaultValue = "25")  int endAge) {
-            
-        return studentRepository.findList(name, department_id, class_id,gender, startAge, endAge);
+            @RequestParam(defaultValue = "0") int startAge, @RequestParam(defaultValue = "65") int endAge) {
+
+        return studentRepository.findList(name, department_id, class_id, gender, startAge, endAge);
     }
 
     @GetMapping("/student")
